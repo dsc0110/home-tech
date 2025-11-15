@@ -1,30 +1,29 @@
 services:
 
-  plex:
-    container_name: plex
-    image: lscr.io/linuxserver/plex
-    privileged: true
+  jellyfin:
+    container_name: jellyfin
+    image: jellyfin/jellyfin:latest
     restart: unless-stopped
     logging:
       driver: json-file
       options:
         max-file: ${DOCKERLOGGING_MAXFILE}
         max-size: ${DOCKERLOGGING_MAXSIZE}
+    user: ${PUID}:${PGID}
     ports:
-      - 32400:32400
+      - 8096:8096/tcp
+      - 7359:7359/udp
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - VERSION=docker
-      - UMASK=002
-      - PLEX_CLAIM=${PLEX_CLAIM}
-      - PLEX_ADVERTISE_URL=${PLEX_ADVERTISE_URL}
-      # - PLEX_NO_AUTH_NETWORKS=
+      - TZ=${TZ} 
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ${DOCKERCONFDIR}/plex:/config
-      - ${DATADIR}/media:/media
+      - ${DOCKERCONFDIR}/jellyfin/config:/config:rw
+      - ${DOCKERCONFDIR}/jellyfin/cache:/cache:rw
+      - ${DOCKERCONFDIR}/jellyfin/logs:/logs:rw
+      - ${DATADIR}/media:/media:rw
+    # devices:
+    #   - /dev/dri/renderD128:/dev/dri/renderD128
+    #   - /dev/dri/card0:/dev/dri/card0
+    #   - /dev/dri:/dev/dri
 
   radarr:
     container_name: radarr
@@ -69,28 +68,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ${DOCKERCONFDIR}/sonarr:/config
       - ${DATADIR}:/data
-
-  bazarr:
-    container_name: bazarr
-    image: ghcr.io/hotio/bazarr:release
-    privileged: true
-    restart: unless-stopped
-    logging:
-      driver: json-file
-      options:
-        max-file: ${DOCKERLOGGING_MAXFILE}
-        max-size: ${DOCKERLOGGING_MAXSIZE}
-    ports:
-      - 6767:6767
-    environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
-      - UMASK=002
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ${DOCKERCONFDIR}/bazarr:/config
-      - ${DATADIR}/media:/data/media
 
   prowlarr:
     container_name: prowlarr
