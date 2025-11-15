@@ -1,25 +1,16 @@
-# Home Tech
-
+# Servers
 ## raspberry
-```
-mkdir -p {REPODIR}/raspberry/appdata/{pihole,home-assistant}
-
-vim /etc/fstab
-UUID={UUID}       {REPODIR}/raspberry/data    ext4    defaults        0       2
-
-vim /etc/samba/smb.conf
-[data]
-path = {REPODIR}/raspberry/data
-writeable = yes
-browseable = yes
-public = yes
-```
+Always on. Networking, home automation and file sync.<br>
+-   pihole: ad blocker
+-   home-assistant: home automation
 
 ## ananas
-```
-mkdir -p {REPODIR}/ananas/appdata/{radarr,sonarr,bazarr,prowlarr,plex,transmission}
-mkdir -p {REPODIR}/ananas/data/{torrents/{shows,movies,music},media/{shows,movies,music}}
-```
+Only on for media consumption. ARR stack and downloader. File backups.<br>
+-   jellyfin: media stream server
+-   radarr: movies
+-   sonarr: tv shows
+-   prowlarr: inderxer
+-   transmission: torrent download client
 
 ## Todo
  - rsync nas
