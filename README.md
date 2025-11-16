@@ -1,14 +1,14 @@
 # servers
 
 ## raspberry
-Always on. Networking, home automation and file sync.<br>
+Networking, home automation & file sync
 -   pihole: ad blocker
 -   home-assistant: home automation
 
 ## ananas
-Only on for media consumption. ARR stack and file backup.<br>
--   jellyfin: media stream server
+Media server
+-   jellyfin: streaming
 -   radarr: movies
 -   sonarr: tv shows
 -   prowlarr: indexer
--   transmission: torrent download client
+-   transmission: torrents

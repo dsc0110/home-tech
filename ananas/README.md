@@ -5,6 +5,45 @@ mkdir -p {REPODIR}/ananas/appdata/{radarr,sonarr,prowlarr,servarr,jellyfin,trans
 mkdir -p {REPODIR}/ananas/data/{torrents/{shows,movies,music},media/{shows,movies,music}}
 ```
 
+## git-shell
+```
+services:
+  git-shell:
+    image: alpine:latest
+    container_name: git-shell
+    command: sleep infinity
+    tty: true
+    stdin_open: true
+    volumes:
+      - /volume2/docker/git-shell:/git-alpine
+      - /volume1/@home:/git-repos
+    ports:
+      - "2222:22"
+    restart: unless-stopped
+```
+
+```
+sudo docker exec -it git-shell /bin/sh
+
+apk update
+apk add --no-cache git
+apk add --no-cache openssh
+
+adduser -D -u ${PUID} -G wheel git
+passwd git
+
+/etc/ssh/sshd_config: PubkeyAuthentication yes
+
+ssh-keygen -A
+/usr/sbin/sshd
+ps aux | grep sshd
+
+su git
+cd /git-repos
+git init --bare mein-repo.git
+```
+
+
 ## jellyfin
 
 -   Hardcare acceleration: Intel QuickSync (QSV)
