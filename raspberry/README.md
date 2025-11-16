@@ -21,7 +21,8 @@ update block list
 todo: backup dashboards
 
 ## Todo
--   rsync nas
 -   traeffik
 -   nextcloud
+-   rsync nas
+-   navidrome
 -   webapp

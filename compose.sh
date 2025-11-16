@@ -30,7 +30,6 @@ if ! command -v docker >/dev/null 2>&1; then
   exit 1
 fi
 
-# Pull updated images and start containers
 echo "Pulling images..."
 docker compose pull
 
