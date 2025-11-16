@@ -19,3 +19,9 @@ update block list
 
 ## home-assistant
 todo: backup dashboards
+
+## Todo
+-   rsync nas
+-   traeffik
+-   nextcloud
+-   webapp
