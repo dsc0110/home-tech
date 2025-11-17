@@ -19,12 +19,11 @@ services:
       - "443:443/tcp"
       # when using Pi-hole as your DHCP server
       - "67:67/udp"
-    env_file:
-      - .env
     environment:
       TZ: ${TZ}
       # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
       FTLCONF_dns_listeningMode: 'all'
+      FTLCONF_webserver_api_password: ${FTLCONF_webserver_api_password}
     volumes:
       - ${DOCKERCONFDIR}/pihole/etc/pihole:/etc/pihole
       - ${DOCKERCONFDIR}/pihole/etc/dnsmasq.d:/etc/dnsmasq.d
