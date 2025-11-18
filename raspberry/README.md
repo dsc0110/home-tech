@@ -15,7 +15,9 @@ public = yes
 ```
 
 ## pihole
-update block list
+-   internet/account info: use other dns servers
+-   dhcp/set as local dns server
+-   update block list
 
 ## home-assistant
 todo: backup dashboards

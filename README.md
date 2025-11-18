@@ -1,12 +1,10 @@
-# servers
+# raspberry
 
-## raspberry
-Networking, home automation & file sync
 -   pihole: ad blocker
 -   home-assistant: home automation
 
-## ananas
-Media server
+# ananas
+
 -   jellyfin: streaming
 -   radarr: movies
 -   sonarr: tv shows

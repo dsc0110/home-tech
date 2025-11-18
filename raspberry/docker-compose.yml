@@ -10,25 +10,21 @@ services:
         max-file: ${DOCKERLOGGING_MAXFILE}
         max-size: ${DOCKERLOGGING_MAXSIZE}
     ports:
-      # DNS Ports
       - "53:53/tcp"
       - "53:53/udp"
-      # Default HTTP Port
       - "80:80/tcp"
-      # Default HTTPs Port. FTL will generate a self-signed certificate
       - "443:443/tcp"
-      # when using Pi-hole as your DHCP server
-      - "67:67/udp"
     environment:
       TZ: ${TZ}
-      # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
-      FTLCONF_dns_listeningMode: 'all'
+      PIHOLE_UID: ${PUID}
+      PIHOLE_GID: ${PGID}
+      FTLCONF_dns_listeningMode: 'all' # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
+      FTLCONF_dns_piholePTR: 'PI.HOLE'
+      FTLCONF_dns_revServers: 'true,${LOCAL_NETWORK},${ROUTER_IP},lan'
+      FTLCONF_dns_domain_name: 'lan'
       FTLCONF_webserver_api_password: ${FTLCONF_webserver_api_password}
     volumes:
       - ${DOCKERCONFDIR}/pihole/etc/pihole:/etc/pihole
-      - ${DOCKERCONFDIR}/pihole/etc/dnsmasq.d:/etc/dnsmasq.d
-    cap_add:
-      - NET_ADMIN
 
   home-assistant:
     container_name: home-assistant
